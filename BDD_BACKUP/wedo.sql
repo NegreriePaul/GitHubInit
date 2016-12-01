@@ -790,7 +790,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `nom`, `prenom`, `ville`, `email`, `pseudo`, `id_media`, `access_token`, `status`, `mdp`, `date_inscription`, `archive`, `mini_bio`) VALUES
-(73, 'Sehnoun', 'Nadir', 'Malakoff', 'sehnounnadir@yahoo.fr', 'Nadyro', 172, '5b16c6a7f4146f7146d04f8304b0232c', 2, 'd6c58ee6bd2765154051b3e9be58df5a', '2016-07-23', 0, 'BÃ©bÃ© Nightliver');
+(73, 'Singh', 'Gurnavdeep', 'Malakoff', 'singh.g@outlook.fr', 'gurnav', 172, '5b16c6a7f4146f7146d04f8304b0232c', 2, 'd6c58ee6bd2765154051b3e9be58df5a', '2016-07-23', 0, 'BÃ©bÃ© Nightliver');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
