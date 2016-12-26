@@ -3,11 +3,14 @@
 /* Fonctions utiles pour le bon fonctionnement du site*/
 
 function database_connection() {
+	$connect = mysqli_connect("127.0.0.1", "root", "", "blogphp");
+
 	/* Vérification de la connexion */
-	if ( !mysqli_connect("127.0.0.1", "root", "", "blogphp") ) {
+	if ( !$connect ) {
 	  echo "Échec de la connexion : ".mysqli_connect_error();
 	  exit();
 	}
+	else { return $connect; }
 }
 
 function check_upload_file($img) {
