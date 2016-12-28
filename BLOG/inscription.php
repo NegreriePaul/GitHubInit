@@ -22,7 +22,7 @@
 		$birthday = $_POST['birthday'];
 
 		$error = false;
-		$listOfErrors=[];
+		$listOfErrors = [];
 
 		//Vérifier le genre
 		if( !isset($listOfgenders[$gender]) ) {
@@ -31,7 +31,7 @@
 		}
 
 		//Vérifier le prénom
-		if( strlen($firstname) ==1 ) {
+		if( strlen($firstname) == 1 ) {
 			$listOfErrors[] = "5";
 			$error = true;
 		}

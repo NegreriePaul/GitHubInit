@@ -11,6 +11,9 @@
     $email = trim($_POST['email']);
 		$pwd1 = $_POST['pwd'];
 
+    $error = false;
+		$listOfErrors = [];
+
     if( !filter_var($email, FILTER_VALIDATE_EMAIL) ) {
 			//echo "Email incorrecte";
 			$listOfErrors[] = "1";
