@@ -3,7 +3,7 @@
 /* Fonctions utiles pour le bon fonctionnement du site*/
 
 function database_connection() {
-	$connect = mysqli_connect("127.0.0.1", "root", "", "blogphp");
+	$connect = mysqli_connect(HOST, DB_USER, DB_PWD, DB_NAME);
 
 	/* Vérification de la connexion */
 	if ( !$connect ) {
