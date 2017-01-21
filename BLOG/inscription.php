@@ -1,24 +1,7 @@
 <?php
 	session_start();
 
-
-	/*
-
-		Tous les champs doivent récupérer les info en cas d'erreur
-		Code propre et commenté
-
-		gender :  not required and radio
-		firstname : not required but min 2 characters
-		lastname : not required but min 2 characters
-		country : required and select
-		birthday : required, date and min 10 years and max 110 years
-		avatar : required, file, max 10mo and create id not exist "upload" directory
-		legacy : (cgu) required checkbox
-
-	*/
-
-
-	require "conf.inc.php";
+	require "./conf/conf.inc.php";
 
 	if( !empty($_POST['email']) && !empty($_POST['pwd1'])  && !empty($_POST['pwd2']) &&
 			isset($_POST["gender"]) && isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["country"]) && !empty($_POST['birthday'])
