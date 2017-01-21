@@ -3,22 +3,44 @@
 define("HOST", "localhost");
 define("DS", DIRECTORY_SEPARATOR);
 
+define("DB_NAME", "blogphp");
+define("DB_USER", "root");
+define("DB_PWD", "root");
+define("DB_HOST", HOST);
+define("DB_PORT", "3306");
+define("DB_DRIVER", "mysql");
+define("DB_PREFIX", "nap_");
+
 
 $msgError = [
-			1=>"L'adresse email n'est pas correcte.",
-			2=>"Le mot de passe doit faire entre 8 et 12 caractères.",
-			3=>"Le mot de passe de confirmation ne correspond pas.",
-			4=>"Votre nom ne peut contenir de chiffres.",
-			5=>"Votre nom doit faire au minimum 2 caractères.",
-			6=>"Votre prénom ne peut contenir de chiffres.",
-			7=>"Votre nom doit faire au minimum 2 caractères.",
-			8=>"Votre age doit être compris en 10ans et 110ans.",
-			9=>"Le fichier doit être une image et peser moins de 10Mb.",
-			10=>"L\'email est obligatoire !",
-			11=>"Le mot de passe est obligatoire !",
-			12=>"La confirmation du mot de passe est obligatoire !",
-			13=>"Le choix d'un pays est obligatoire !",
-			14=>"La date de naissance est obligatoire !",
-			15=>"Un avatar est obligatoire !",
-			16=>"L\'acception des CGUs est obligatoire"
+			1=>"L'adresse email n'est pas correcte",
+			2=>"Le mot de passe doit faire entre 8 et 12 caractères",
+			3=>"Le mot de passe de confirmation ne correspond pas",
+			4=>"Genre inconnu",
+			5=>"Le prénom doit faire au moins 2 caractères",
+			6=>"Le nom doit faire au moins 2 caractères",
+			7=>"Format de date incorrect",
+			8=>"Vous devez avoir entre 10 et 110 ans",
+			9=>"Vous devez accépter les CGUs",
+			10=>"Veuillez donner un avatar",
+			11=>"Erreur à l'upload du fichier",
+			12=>"L'extension de votre avatar n'est pas correct",
+			13=>"Votre avatar est trop lourd"
 ];
+
+$listOfgenders = [
+					"mr" => "Mr",
+					"mme" => "Mme",
+					"autre" => "Autre"
+];
+$defaultGender = "mr";
+
+$listOfCountries = [
+					"fr"=>"France",
+					"pl"=>"Pologne",
+					"en"=>"Angleterre"
+];
+$defaultCountry = "fr";
+
+$avatarFileType = ["png", "jpg", "jpeg", "gif"];
+$avatarLimitSize = 10000000;
