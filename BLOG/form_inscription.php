@@ -16,7 +16,7 @@
 	}
 ?>
 
-<form method="POST" action="subscribe.php" enctype="multipart/form-data">
+<form method="POST" action="inscription.php" enctype="multipart/form-data">
 
 	<?php
 
