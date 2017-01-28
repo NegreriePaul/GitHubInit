@@ -5,10 +5,11 @@
 
   if( !empty($_POST['titre']) && !empty($_POST['commentaire']) ) {
 
-    $titre = safeStringFromUser($_POST['titre']);
-    $commentaire = safeStringFromUser($_POST['commentaire']);
     $listOfErrors = [];
     $error = false;
+
+    $titre = safeStringFromUser($_POST['titre']);
+    $commentaire = safeStringFromUser($_POST['commentaire']);
 
     $avatarCheck = check_upload_file($_FILES['image']);
     if( $avatarCheck !== null) {
@@ -25,7 +26,7 @@
 					VALUES (  :libelle, :contenu ;" );
 
 				$query->execute([
-						  "libelle"=>$tire,
+						  "libelle"=>$titre,
 						  "contenu"=>$commentaire
 					]);
 

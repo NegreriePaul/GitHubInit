@@ -41,6 +41,3 @@ $listOfCountries = [
 					"en"=>"Angleterre"
 ];
 $defaultCountry = "fr";
-
-$avatarFileType = ["png", "jpg", "jpeg", "gif"];
-$avatarLimitSize = 10000000;

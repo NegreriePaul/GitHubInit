@@ -18,6 +18,10 @@ function safeStringFromUser($string) {
 
 function check_upload_file($img) {
 	$listOfErrors = [];
+	$error = false;
+
+	$avatarFileType = ["png", "jpg", "jpeg", "gif"];
+	$avatarLimitSize = 10000000;
 
 	if( empty($img) ) {
 		$listOfErrors[] = "10";
@@ -78,8 +82,9 @@ function safely_move_uploaded_file($folder, $file) {
 		mkdir($pathUpload);
 	}
 	//Déplacer l'avatar dedans
+	$infoFile = pathinfo( $file["name"] );
 	$nameAvatar = uniqid().".". strtolower($infoFile["extension"]);
-	move_uploaded_file($_FILES[$file]["tmp_name"], $pathUpload.DS.$nameAvatar);
+	move_uploaded_file($file["tmp_name"], $pathUpload.DS.$nameAvatar);
 
 	return $nameAvatar;
 }
@@ -142,8 +147,8 @@ function getArticles() {
 
 function getCommentaire() {
     global $pdo;
-    $query = $pdo->prepare("SELECT u.id,u.pseudo, u.nom, u.prenom, c.id_element, c.contenu, c.date_comment"
-            . " FROM user u JOIN commentaire c ON (c.id_user = u.id)");
+    $query = $pdo->prepare("SELECT u.id,u.pseudo, u.nom, u.prenom, c.id_element, c.contenu, c.date_comment
+				FROM user u JOIN commentaire c ON (c.id_user = u.id)");
     $query->execute();
     $row = $query->fetchAll(PDO::FETCH_ASSOC);
     return $row;
