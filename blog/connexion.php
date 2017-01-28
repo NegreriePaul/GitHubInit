@@ -41,6 +41,7 @@
         if( strcomp($result['email'], $email) === 0 ) {
           if( !password_verify($pwd, $result['password']) ) {
             echo "Vous êtes connectés !";
+            $_SESSION['utilisateurs'] = $email;
           } else {
             echo "Mot de passe invalide !";
           }

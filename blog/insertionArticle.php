@@ -22,12 +22,13 @@
 
 				$db = database_connection();
 
-				$query = $db->prepare( "INSERT INTO ".DB_PREFIX."articles ( libelle, contenu)
-					VALUES (  :libelle, :contenu ;" );
+				$query = $db->prepare( "INSERT INTO ".DB_PREFIX."articles ( utilisateur, libelle, contenu)
+					VALUES ( :utilisateur, :libelle, :contenu ) ;" );
 
 				$query->execute([
-						  "libelle"=>$titre,
-						  "contenu"=>$commentaire
+              "utilisateur" => $_SESSION['utilisateur'],
+						  "libelle" => $titre,
+						  "contenu" => $commentaire
 					]);
 
 			} catch( Exception $e ) {
