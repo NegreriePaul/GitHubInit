@@ -32,11 +32,6 @@
         $query->execute();
 
         $result = $query->fetch();
-        /***********************
-        echo "<pre>";
-          print_r($result);
-        echo "</pre>";
-        ************************/
 
         if( strcomp($result['email'], $email) === 0 ) {
           if( !password_verify($pwd, $result['password']) ) {
@@ -50,7 +45,5 @@
       } catch( Exception $e ) {
 				die("Error SQL : ".$e->getMessage());
       }
-
     }
-
   }
