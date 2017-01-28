@@ -1,0 +1,15 @@
+{
+    "name": "phpunit",
+    "require": {
+        "phpunit/phpunit": "5.7.*"
+    },
+    "autoload": {
+        "psr-4": { "": "blog/" }
+    },
+    "authors": [
+        {
+            "name": "Thomas Dudoux",
+            "email": "thomas.dudoux@gmail.com"
+        }
+    ]
+}
