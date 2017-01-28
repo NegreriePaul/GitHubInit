@@ -2,10 +2,11 @@
 	session_start();
 
 	require "./conf/conf.inc.php";
+	require "./functions/helpers.php";
 
 	if( !empty($_POST['email']) && !empty($_POST['pwd1'])  && !empty($_POST['pwd2']) &&
-			isset($_POST["gender"]) && isset($_POST["firstname"]) && isset($_POST["lastname"]) && isset($_POST["country"]) && !empty($_POST['birthday'])
-			)  {
+			isset($_POST["gender"]) && isset($_POST["firstname"]) && isset($_POST["lastname"]) &&
+			isset($_POST["country"]) && !empty($_POST['birthday'])) {
 
 		$email = trim($_POST['email']);
 		$pwd1 = $_POST['pwd1'];
@@ -53,7 +54,7 @@
 				$error = true;
 			}
 
-		}else{
+		} else {
 			$listOfErrors[]="7";
 			$error = true;
 		}
@@ -90,7 +91,7 @@
 		if(empty($_FILES["avatar"])){
 			$listOfErrors[]="10";
 			$error = true;
-		}else if($_FILES["avatar"]["error"] > 0){
+		} else if($_FILES["avatar"]["error"] > 0) {
 			$error = true;
 			switch ($_FILES["avatar"]["error"]) {
 	            case UPLOAD_ERR_INI_SIZE:
@@ -118,7 +119,7 @@
 	                $listOfErrors[]="11";
 	                break;
 	        }
-		}else{
+		} else {
 			$infoFile = pathinfo($_FILES["avatar"]["name"]);
 			if(!in_array( strtolower($infoFile["extension"]) , $avatarFileType)){
 				$listOfErrors[]="12";
@@ -132,11 +133,11 @@
 		}
 
 
-		if($error){
+		if( $error ){
 			$_SESSION["form_error"] = $listOfErrors;
 			$_SESSION["form_post"] = $_POST;
 			header("Location: ".$_SERVER["HTTP_REFERER"]);
-		}else{
+		} else {
 
 			//Est ce que le dossier upload existe
 			$pathUpload = __DIR__.DS."upload";
@@ -154,10 +155,10 @@
 			//$db est un objet, il s'agit de l'instance de la classe PDO
 			try {
 
-				$db = new PDO( DB_DRIVER.":host=".DB_HOST.";port=".DB_PORT.";dbname=".DB_NAME, DB_USER, DB_PWD);
+				$db = database_connection();
 
 				$query = $db->prepare( "INSERT INTO ".DB_PREFIX."users ( firstname, lastname, gender, country, birthday, email, password, avatar)
-					VALUES (  :firstname, :lastname, :gender, :country, :birthday, :email, :pwd, :avatar);"  );
+					VALUES (  :firstname, :lastname, :gender, :country, :birthday, :email, :password, :avatar);" );
 
 				$query->execute([
 						  "firstname"=>$firstname,
@@ -166,11 +167,11 @@
 						  "country"=>$country,
 						  "birthday"=>$date->format('Y-m-d'),
 						  "email"=>$email,
-						  "pwd"=>$pwd,
+						  "password"=>$pwd,
 						  "avatar"=>$nameAvatar
 					]);
 
-			}catch(Exception $e){
+			} catch( Exception $e ) {
 				die("Error SQL : ".$e->getMessage());
 			}
 

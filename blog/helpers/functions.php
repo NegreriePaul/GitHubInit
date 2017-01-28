@@ -3,14 +3,15 @@
 /* Fonctions utiles pour le bon fonctionnement du site*/
 
 function database_connection() {
-	$connect = mysqli_connect(HOST, DB_USER, DB_PWD, DB_NAME);
+	$db = new PDO( DB_DRIVER.":host=".DB_HOST.";port=".DB_PORT.";dbname=".DB_NAME, DB_USER, DB_PWD);
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	return $db;
+}
 
-	/* Vérification de la connexion */
-	if ( !$connect ) {
-	  echo "Échec de la connexion : ".mysqli_connect_error();
-	  exit();
-	}
-	else { return $connect; }
+function safeStringFromUser($string) {
+	$string = htmlentities($string, ENT_QUOTES, 'UTF-8');
+	$string = strip_tags($string);
+	return $string;
 }
 
 function check_upload_file($img) {
