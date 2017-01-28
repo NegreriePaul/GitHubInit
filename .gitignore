@@ -1,0 +1,6 @@
+upload/
+photos/
+vendor/
+composer.json
+composer.lock
+phpunit.xml

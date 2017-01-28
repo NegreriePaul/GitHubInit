@@ -29,7 +29,7 @@
 					?$_SESSION["form_post"]["email"]:""; ?>"
 			required="required"><br>
 
-	<input type="password" name="pwd1" placeholder="Votre mot de passe" required="required"><br>
+	<input type="password" name="pwd" placeholder="Votre mot de passe" required="required"><br>
 
 
 	<input type="submit" value="Se connecter">
@@ -43,5 +43,5 @@
 	unset($_SESSION["form_post"]);
 	unset($_SESSION["form_error"]);
 
-	include "footer.php";
+	include "./conf/footer.php";
 ?>
