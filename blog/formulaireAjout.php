@@ -1,5 +1,5 @@
 <?php
-  include "conf/header.php";
+  include "./conf/header.php";
 ?>
    <h2>Nouvel article</h2>
    <form action="insertionArticle.php" method="POST" enctype="multipart/form-data">

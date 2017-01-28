@@ -3,18 +3,21 @@
   include "./conf/header.php";
   require "./helpers/functions.php";
 
-  if( !empty($_POST['titre']) && !empty($_POST['commentaire']) && !empty($_POST['image'])) {
+  if( !empty($_POST['titre']) && !empty($_POST['commentaire']) ) {
 
     $titre = safeStringFromUser($_POST['titre']);
     $commentaire = safeStringFromUser($_POST['commentaire']);
+    $listOfErrors = [];
+    $error = false;
 
-    $avatarCheck = check_upload_file($_POST['image']);
+    $avatarCheck = check_upload_file($_FILES['image']);
     if( $avatarCheck !== null) {
-      $listOfErrors = $avatarCheck;
+      array_merge($listOfErrors, $avatarCheck);
       echo "<br />L'article n'a pas pu être ajouté.<br /><br />";
     } else {
-
       try {
+
+        $nameImage = safely_move_uploaded_file('upload', $_FILES['image']);
 
 				$db = database_connection();
 

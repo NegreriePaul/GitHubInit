@@ -2,6 +2,8 @@
 
 /* Fonctions utiles pour le bon fonctionnement du site*/
 
+require 'conf/conf.inc.php';
+
 function database_connection() {
 	$db = new PDO( DB_DRIVER.":host=".DB_HOST.";port=".DB_PORT.";dbname=".DB_NAME, DB_USER, DB_PWD);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -15,12 +17,14 @@ function safeStringFromUser($string) {
 }
 
 function check_upload_file($img) {
-	if( empty($_FILES[$img]) ) {
+	$listOfErrors = [];
+
+	if( empty($img) ) {
 		$listOfErrors[] = "10";
 		$error = true;
-	} else if( $_FILES[$img]["error"] > 0 ) {
+	} else if( $img["error"] > 0 ) {
 		$error = true;
-		switch ( $_FILES[$img]["error"] ) {
+		switch ( $img["error"] ) {
 			case UPLOAD_ERR_INI_SIZE:
 				$listOfErrors[] = "11";
 				break;
@@ -47,13 +51,13 @@ function check_upload_file($img) {
 				break;
 		}
 	} else {
-		$infoFile = pathinfo( $_FILES[$img]["name"] );
+		$infoFile = pathinfo( $img["name"] );
 		if( !in_array(strtolower($infoFile["extension"]), $avatarFileType) ) {
 			$listOfErrors[] = "12";
 			$error = true;
 		}
 
-		if( $_FILES[$img]["size"] > $avatarLimitSize ) {
+		if( $img["size"] > $avatarLimitSize ) {
 			$listOfErrors[] = "13";
 			$error = true;
 		}
@@ -76,6 +80,8 @@ function safely_move_uploaded_file($folder, $file) {
 	//Déplacer l'avatar dedans
 	$nameAvatar = uniqid().".". strtolower($infoFile["extension"]);
 	move_uploaded_file($_FILES[$file]["tmp_name"], $pathUpload.DS.$nameAvatar);
+
+	return $nameAvatar;
 }
 
 function email_exists($email) {

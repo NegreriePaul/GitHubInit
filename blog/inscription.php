@@ -88,66 +88,13 @@
 		//$avatarFileType = ["png", "jpg", "jpeg", "gif"];
 		//$avatarLimitSize = 10000000;
 
-		if(empty($_FILES["avatar"])){
-			$listOfErrors[]="10";
-			$error = true;
-		} else if($_FILES["avatar"]["error"] > 0) {
-			$error = true;
-			switch ($_FILES["avatar"]["error"]) {
-	            case UPLOAD_ERR_INI_SIZE:
-	                $listOfErrors[]="11";
-	                break;
-	            case UPLOAD_ERR_FORM_SIZE:
-	                $listOfErrors[]="11";
-	                break;
-	            case UPLOAD_ERR_PARTIAL:
-	                $listOfErrors[]="11";
-	                break;
-	            case UPLOAD_ERR_NO_FILE:
-	                $listOfErrors[]="11";
-	                break;
-	            case UPLOAD_ERR_NO_TMP_DIR:
-	                $listOfErrors[]="11";
-	                break;
-	            case UPLOAD_ERR_CANT_WRITE:
-	                $listOfErrors[]="11";
-	                break;
-	            case UPLOAD_ERR_EXTENSION:
-	                $listOfErrors[]="11";
-	                break;
-	            default:
-	                $listOfErrors[]="11";
-	                break;
-	        }
-		} else {
-			$infoFile = pathinfo($_FILES["avatar"]["name"]);
-			if(!in_array( strtolower($infoFile["extension"]) , $avatarFileType)){
-				$listOfErrors[]="12";
-				$error = true;
-			}
-
-			if($_FILES["avatar"]["size"]>$avatarLimitSize){
-				$listOfErrors[]="13";
-				$error = true;
-			}
+		$avatarCheck = check_upload_file($_FILES['avatar']);
+    if( $avatarCheck !== null) {
+      array_merge($listOfErrors, $avatarCheck);
+      $error = true;
+    } else {
+			$nameAvatar = safely_move_uploaded_file('upload', $_FILES['avatar']);
 		}
-
-
-		if( $error ){
-			$_SESSION["form_error"] = $listOfErrors;
-			$_SESSION["form_post"] = $_POST;
-			header("Location: ".$_SERVER["HTTP_REFERER"]);
-		} else {
-
-			//Est ce que le dossier upload existe
-			$pathUpload = __DIR__.DS."upload";
-			if( !file_exists($pathUpload) ){
-				//Sinon le créer
-				mkdir($pathUpload);
-			}
-			//Déplacer l'avatar dedans
-			$nameAvatar = uniqid().".". strtolower($infoFile["extension"]);
-			move_uploaded_file($_FILES["avatar"]["tmp_name"], $pathUpload.DS.$nameAvatar);
 
 			//Hash du mot de passe
 			$pwd = password_hash($pwd1, PASSWORD_DEFAULT);
@@ -176,8 +123,6 @@
 			}
 
 		}
-
-	}
 
 
 die("Access denied");
