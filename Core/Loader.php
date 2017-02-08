@@ -8,20 +8,21 @@
 
   class Loader {
 
-    use \GitHubInit\Core\Pattern\Singleton; // Thanks Trait feature of PHP 5.4, I don't duplicate pattern code
+    use \GitHubInit\Core\Pattern\Singleton;
 
     public function init() {
       // Register the loader method
       spl_autoload_register(array(__CLASS__, '_loadClasses'));
     }
 
-    private function _loadClasses($sClass) {
+    // Class Loader
+    private function _loadClasses($class) {
       // Remove namespace and backslash
-      $sClass = str_replace(array(__NAMESPACE__, 'TestProject', '\\'), '/', $sClass);
-      if (is_file(__DIR__ . '/' . $sClass . '.php'))
-        require_once __DIR__ . '/' . $sClass . '.php';
-      if (is_file(ROOT_PATH . $sClass . '.php'))
-        require_once ROOT_PATH . $sClass . '.php';
+      $sClass = str_replace(array(__NAMESPACE__, 'GitHubInit', '\\'), '/', $class);
+      if (is_file(__DIR__ . '/' . $class . '.php'))
+        require_once __DIR__ . '/' . $class . '.php';
+      if (is_file(ROOT_PATH . $class . '.php'))
+        require_once ROOT_PATH . $class . '.php';
     }
 
   }

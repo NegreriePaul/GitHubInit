@@ -19,7 +19,7 @@ namespace GitHubInit\Core;
       // $this->setColumns();
     }
 
-    // Insert or Update en BDD
+    // Insert or Update in DB
     public function save() {
       if($this->getId() === -1) {
         $sqlCol = null;
@@ -47,8 +47,11 @@ namespace GitHubInit\Core;
     }
 
     public function populate() {
-      // Charge un objet vide a partir d'un élément du tableau
-      // Penser au Duplicata dans la BDD
+      /**
+      * TODO
+      * Load an empty object from a given string
+      * Think about duplicate
+      */
     }
 
     protected function setDb() {
@@ -65,7 +68,7 @@ namespace GitHubInit\Core;
     }
 
     protected function setTable() {
-      // Récupérer le nom de la table dynamiquement
+      // Dynamically retrieve database name
       $this->table = DB_PREFIX.strtolower(get_class($this));
     }
 
@@ -74,7 +77,7 @@ namespace GitHubInit\Core;
     }
 
     protected function setColumns() {
-      // Récupérer le nom des colonnes de la table dynamiquement
+      // Dynamically retrieve columns names
       $this->columns = array_diff_key(get_class_vars(get_class($this)),
         get_class_vars(get_parent_class($this)));
     }
