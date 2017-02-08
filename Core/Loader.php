@@ -8,7 +8,7 @@
 
   class Loader {
 
-    use \TestProject\Engine\Pattern\Singleton; // Thanks Trait feature of PHP 5.4, I don't duplicate pattern code
+    use \GitHubInit\Core\Pattern\Singleton; // Thanks Trait feature of PHP 5.4, I don't duplicate pattern code
 
     public function init() {
       // Register the loader method
