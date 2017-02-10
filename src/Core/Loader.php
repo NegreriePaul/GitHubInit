@@ -1,6 +1,6 @@
 <?php
 
-  namespace GitHubInit\Core;
+  namespace Core;
 
   // First, include necessary Pattern classes
   require_once __DIR__ . '/Pattern/Base.trait.php';

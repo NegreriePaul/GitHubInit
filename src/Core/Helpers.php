@@ -1,6 +1,8 @@
 <?php
 
- namespace GitHubInit\Core;
+ namespace Core;
+
+  require 'conf.inc.php';
 
   class Helpers {
 
@@ -14,33 +16,30 @@
     /**
      * Verify if the log directory exist and if the log file exist
      * To launch Before any Script execution
-     * @before AnyFunction()
      */
     public static function createLogExist() {
       if( !is_dir('logs') ) {
         mkdir('logs');
       }
-      if( !is_file("logs/log.txt") ) {
-        $this->log("***/!\ This is the log File /!\***");
+      if( !file_exists("logs/log.txt") ) {
+        log("***/!\ This is the log File /!\***");
       }
     }
 
     // Safe logging writing
     public static function log($msg) {
-      $logFile = fopen("log.txt", "a");
+      $logFile = fopen('log.txt', 'a');
       // Locking file to be the only One
       if( flock($logFile, LOCK_EX) !== false ) {
         try {
           // Writing, unlocking and closing file
-          fwrite($logFile, 'At : '.date("d-m-Y"));
-          fwrite($logFile, '\n');
+          fwrite($logFile, 'At '.date("d-m-Y").' : ');
           fwrite($logFile, $msg);
-          fwrite($logFile, '\n');
-          fwrite($logFile, PHP_EOF);
+          fwrite($logFile, "\n");
           flock($logFile, LOCK_UN);
           fclose($logFile);
         } catch (Exception $e) {
-          die("Erreur : ".$e->getMessage());
+          die('Erreur : '.$e->getMessage());
         }
       }
     }

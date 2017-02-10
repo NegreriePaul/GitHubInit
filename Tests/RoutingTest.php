@@ -2,6 +2,9 @@
 
   namespace Tests\Core;
 
-  class RoutingTest extends \PHPUnit_Framework_TestCase {
+  use PHPUnit\Framework\TestCase;
+  use GitHubInit\Core\Routing;
+
+  class RoutingTest extends TestCase {
 
   }

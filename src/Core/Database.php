@@ -1,6 +1,6 @@
 <?php
 
-namespace GitHubInit\Core;
+namespace Core;
 
   class Database {
 

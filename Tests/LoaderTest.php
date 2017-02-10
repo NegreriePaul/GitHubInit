@@ -2,6 +2,10 @@
 
   namespace Tests\Core;
 
-  class LoaderTest extends \PHPUnit_Framework_TestCase {
+  use PHPUnit\Framework\TestCase;
+  use GitHubInit\Core\Loader;
+
+
+  class LoaderTest extends TestCase {
 
   }

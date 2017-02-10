@@ -2,9 +2,12 @@
 
   namespace Tests\Core;
 
-  class HelpersTest extends \PHPUnit_Framework_TestCase {
+  use PHPUnit\Framework\TestCase;
+  use Core\Helpers;
 
-    public function test_createLogExist() {
+  class HelpersTest extends TestCase {
+
+    public function testCreateLogExist() {
       Helpers::createLogExist();
       $this->assertDirectoryExists('logs/', 'Erreur le dossier logs n\'à pas été créé.');
       $this->assertFileExists('logs/log.txt', 'Erreur le fichier logs.txt n\'à pas été créé.');
@@ -12,12 +15,15 @@
       $this->assertFileIsWritable('logs/log.txt', 'Erreur de droits d\'écriture.');
     }
 
-    // Not sure about how to implement it yet
-    // public function test_log() {
-    //   $msg = '***/!\ This is the log File /!\***';
-    //   Helpers::createLogExist($msg);
+    // Testing if the logging functions work properly
+    // public function testLog() {
+    //   $msg = '***/!\ This is an ERROR  /!\***';
+    //   Helpers::log($msg);
     // }
 
-    // public function test_purgeLog() {}
+    public function testPurgeLog() {
+      Helpers::purgeLog();
+      $this->assertFileExists('logs/*.zip', 'Erreur il n\'existe aucun fichier de log zippé.');
+    }
 
   }
