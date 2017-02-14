@@ -11,9 +11,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title><?=\TestProject\Engine\Config::SITE_NAME?></title>
+    <title><?=SITE_NAME?></title> <!--Pas encore defini dans conf.inc.php a voir avec Thomas-->
     <meta name="author" content="Paul Negrerie" />
-    <link rel="stylesheet" href="<?=ROOT_URL?>static/style.css" />
+    <link rel="stylesheet" href="<?=ROOT_URL?>static/style.css" /> <!--same -->
 </head>
 <body>
 <div class="center">
