@@ -6,7 +6,8 @@
  * Time: 11:27
  */
 
-?>
+ include '../conf.inc.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
