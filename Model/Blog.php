@@ -6,10 +6,10 @@ class Blog
 {
     protected $db;
 
-    /*Constructeur de la class Blog*/
+    /*Constructor of Blog Class*/
     public function __construct()
     {
-        $this->db = new \Engine\Db;
+        $this->db = new \Core\Database;
     }
 
     public function get($offset, $limit)
@@ -21,21 +21,21 @@ class Blog
         return $result->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    /*AFFICHER touts les posts existants du blog*/
+    /*DISPLAY all existing blog posts*/
     public function getAll()
     {
         $result = $this->db->query('SELECT * FROM Posts ORDER BY createdDate DESC');
         return $result->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    /* AJOUTER Post avec Titre, corps du post et date de création en paramètres*/
+    /*ADD Post with Title, body of the post and date of creation in parameters*/
     public function add(array $aData)
     {
         $result = $this->db->prepare('INSERT INTO Posts (title, body, createdDate) VALUES(:title, :body, :created_date)');
         return $result->execute($aData);
     }
 
-    /*AFFICHER le post sélectionner par l'utilisateur*/
+    /*DISPLAY the post selected by user with postId*/
     public function getById($id)
     {
         $result = $this->db->prepare('SELECT * FROM Posts WHERE id = :postId LIMIT 1');
@@ -44,7 +44,7 @@ class Blog
         return $result->fetch(\PDO::FETCH_OBJ);
     }
 
-    /*METTRE A JOUR les données d'un ou plusieurs posts selon son id*/
+    /*UPDATE the data of one or more posts according to its id*/
     public function update(array $aData)
     {
         $result = $this->db->prepare('UPDATE Posts SET title = :title, body = :body WHERE id = :postId LIMIT 1');
@@ -54,7 +54,7 @@ class Blog
         return $result->execute();
     }
 
-    /*SUPPRIMER son post*/
+    /*DELETE post*/
     public function delete($id)
     {
         $result = $this->db->prepare('DELETE FROM Posts WHERE id = :postId LIMIT 1');
