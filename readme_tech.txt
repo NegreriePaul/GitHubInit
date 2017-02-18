@@ -1,0 +1,3 @@
+- Please create a database name/user and exucute "db.sql" first
+- MySQL connection information, please edit /Engine/Config.php
+- Admin login (email/password) is: test@test.com / pwd123
